@@ -29,6 +29,12 @@ export const CameraModal: React.FC<CameraModalProps> = ({ isOpen, onClose, onCap
     };
   }, [isOpen, facingMode]);
 
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
   const stopStream = () => {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
